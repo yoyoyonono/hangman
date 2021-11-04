@@ -1,0 +1,2 @@
+# hangman
+perfect hangman strategy
