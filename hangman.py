@@ -1,10 +1,10 @@
 from pathlib import Path
 from random import choice
 
-words_str = Path('words.txt').read_text('utf-8')
-LETTERS = {x for x in words_str}
+_words_str = Path('words.txt').read_text('utf-8')
+LETTERS = {x for x in _words_str}
 LETTERS.remove('\n')
-WORDS = words_str.splitlines()
+WORDS = _words_str.splitlines()
 
 class Hangman:
     def __init__(self, word: str = None):
