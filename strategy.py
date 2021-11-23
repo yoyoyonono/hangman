@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import hangman
+import random
 import re
 
 def guess_word_to_re(guess_word: list[str]) -> re.Pattern:
@@ -20,8 +21,28 @@ class Strategy(ABC):
         pass
 
     @abstractmethod
+    def play(self):
+        pass
+
+    @abstractmethod
     def play_round(self):
         pass
+
+class RandomStrategy(Strategy):
+    def __init__(self, game: hangman.Hangman):
+        self.game = game
+
+    def play(self):
+        while not self.game.is_over():
+            self.play_round()
+        return (self.game.word, len(self.game.guesses), len(self.game.wrong_guesses))
+        
+
+    def play_round(self):
+        self.game.guess(self.choose_random())
+    
+    def choose_random(self):
+        return random.choice(hangman.LETTERS - self.game.wrong_guesses)
 
 class PerfectStrategy(Strategy):
     def __init__(self, game: hangman.Hangman):

@@ -31,3 +31,6 @@ class Hangman:
             self.guessed_word = list(word)
             return True
         return False
+    
+    def is_over(self):
+        return None not in self.guessed_word
